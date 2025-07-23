@@ -2,11 +2,14 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Badge } from '@/components/ui/badge';
+import { useCart } from '@/hooks/useCart';
 import Icon from '@/components/ui/icon';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { getCartItemsCount } = useCart();
 
   const navigation = [
     { name: 'Главная', href: '/' },
@@ -15,6 +18,7 @@ const Header = () => {
     { name: 'Trade-in', href: '/trade-in' },
     { name: 'Кредит', href: '/financing' },
     { name: 'Страхование', href: '/insurance' },
+    { name: 'Корзина', href: '/cart' },
     { name: 'О нас', href: '/about' },
     { name: 'Контакты', href: '/contacts' }
   ];
@@ -57,6 +61,16 @@ const Header = () => {
               <div className="text-sm font-medium">+7 (495) 123-45-67</div>
               <div className="text-xs text-gray-500">Ежедневно 9:00-21:00</div>
             </div>
+            <Link to="/cart" className="relative">
+              <Button variant="outline" size="icon">
+                <Icon name="ShoppingCart" size={16} />
+                {getCartItemsCount() > 0 && (
+                  <Badge className="absolute -top-2 -right-2 w-5 h-5 p-0 flex items-center justify-center text-xs bg-primary">
+                    {getCartItemsCount()}
+                  </Badge>
+                )}
+              </Button>
+            </Link>
             <Link to="/contacts">
               <Button className="bg-primary hover:bg-primary/90">
                 <Icon name="Phone" size={16} className="mr-2" />
@@ -104,6 +118,12 @@ const Header = () => {
                       <div className="font-medium">+7 (495) 123-45-67</div>
                       <div className="text-sm text-gray-500">Ежедневно 9:00-21:00</div>
                     </div>
+                    <Link to="/cart" onClick={() => setIsOpen(false)}>
+                      <Button variant="outline" className="w-full">
+                        <Icon name="ShoppingCart" size={16} className="mr-2" />
+                        Корзина {getCartItemsCount() > 0 && `(${getCartItemsCount()})`}
+                      </Button>
+                    </Link>
                     <Link to="/contacts" onClick={() => setIsOpen(false)}>
                       <Button className="w-full bg-primary hover:bg-primary/90">
                         <Icon name="Phone" size={16} className="mr-2" />

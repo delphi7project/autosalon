@@ -13,6 +13,7 @@ import TestDrive from "./pages/TestDrive";
 import Service from "./pages/Service";
 import Insurance from "./pages/Insurance";
 import TradeIn from "./pages/TradeIn";
+import Cart from "./pages/Cart";
 import Contacts from "./pages/Contacts";
 import About from "./pages/About";
 import Warranty from "./pages/Warranty";
@@ -36,6 +37,7 @@ const App = () => (
             <Route path="/service" element={<Service />} />
             <Route path="/insurance" element={<Insurance />} />
             <Route path="/trade-in" element={<TradeIn />} />
+            <Route path="/cart" element={<Cart />} />
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/about" element={<About />} />
             <Route path="/warranty" element={<Warranty />} />
